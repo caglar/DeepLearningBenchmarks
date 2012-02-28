@@ -180,7 +180,7 @@ def bench_logreg():
     #
     # Note on the transposed-ness of v for some reason, this data layout is faster than the
     # non-transposed orientation.
-    # The change doesn't make much difference in the deeper models, 
+    # The change doesn't make much difference in the deeper models,
     # but in this case it was more than twice as fast.
     #
 

@@ -1,0 +1,32 @@
+ScipyGer{destructive} [@52352144] ''   14
+ |<TensorType(float64, matrix)> [@41114000]
+ |TensorConstant{-0.01} [@52329040]
+ |InplaceDimShuffle{1} [@52294608] ''   12
+ | |CrossentropySoftmax1HotWithBiasDx [@41132432] ''   10
+ | | |TensorConstant{(1,) of 1.0} [@51990480]
+ | | |CrossentropySoftmaxArgmax1HotWithBias.1 [@41114448] ''   9
+ | | | |InplaceDimShuffle{x,1} [@52297232] ''   8
+ | | | | |_dot22 [@42591568] ''   7
+ | | | | | |InplaceDimShuffle{x,0} [@52297488] ''   6
+ | | | | | | |Subtensor{int64} [@41083472] ''   4
+ | | | | | | | |<TensorType(float64, matrix)> [@41114064]
+ | | | | | | | |ScalarFromTensor [@41104080] ''   0
+ | | | | | | | | |<TensorType(int64, scalar)> [@41114128]
+ | | | | | |InplaceDimShuffle{1,0} [@52326992] ''   1
+ | | | | | | |<TensorType(float64, matrix)> [@41114000]
+ | | | |<TensorType(float64, vector)> [@41114192]
+ | | | |InplaceDimShuffle{x} [@52326544] ''   5
+ | | | | |Subtensor{int64} [@40876240] ''   3
+ | | | | | |<TensorType(int32, vector)> [@41114256]
+ | | | | | |ScalarFromTensor [@41104080] ''   0
+ | | |InplaceDimShuffle{x} [@52326544] ''   5
+ |Subtensor{int64} [@41083472] ''   4
+Elemwise{Composite{[mod(add(i0, i1), i2)]}}[(0, 1)] [@52385872] ''   2
+ |TensorConstant{1} [@42062224]
+ |<TensorType(int64, scalar)> [@41114128]
+ |TensorConstant{6000} [@41825488]
+Elemwise{Composite{[sub(i0, mul(i1, i2))]}}[(0, 0)] [@52409232] ''   13
+ |<TensorType(float64, vector)> [@41114192]
+ |TensorConstant{(1,) of 0.01} [@42592336]
+ |Sum{0} [@41132560] ''   11
+ | |CrossentropySoftmax1HotWithBiasDx [@41132432] ''   10
