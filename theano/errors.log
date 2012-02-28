@@ -1,0 +1,117 @@
+Traceback (most recent call last):
+  File "mlp.py", line 248, in <module>
+    online_mlp_784_10()
+  File "mlp.py", line 87, in online_mlp_784_10
+    train.fn(n_calls=n_examples)
+TypeError: streamline_nice_errors_f() takes no arguments (1 given)
+Traceback (most recent call last):
+  File "mlp.py", line 248, in <module>
+    online_mlp_784_10()
+  File "mlp.py", line 87, in online_mlp_784_10
+    train.fn(n_calls=n_examples)
+TypeError: streamline_nice_errors_f() takes no arguments (1 given)
+Using gpu device 0: GeForce GTX 480
+Traceback (most recent call last):
+  File "mlp.py", line 248, in <module>
+    online_mlp_784_10()
+  File "mlp.py", line 87, in online_mlp_784_10
+    train.fn(n_calls=n_examples)
+TypeError: streamline_nice_errors_f() takes no arguments (1 given)
+DEPRECATION: max_pool2D renamed to max_pool_2d
+DEPRECATION: max_pool2D renamed to max_pool_2d
+DEPRECATION: max_pool2D renamed to max_pool_2d
+DEPRECATION: max_pool2D renamed to max_pool_2d
+DEPRECATION: max_pool2D renamed to max_pool_2d
+DEPRECATION: max_pool2D renamed to max_pool_2d
+log_thunk_trace: There was a problem executing an Op.
+log_thunk_trace: Definition in:
+log_thunk_trace: File "convnet.py", line 143, in <module>
+    bench_ConvMed(1)
+log_thunk_trace: File "convnet.py", line 96, in bench_ConvMed
+    c0 = tanh(conv2d(sx, w0, image_shape=(batchsize, 1, 96, 96), filter_shape=(6,1,7,7)) + b0.dimshuffle(0, 'x', 'x'))
+log_thunk_trace: File "/u/gulcehrc/Codes/python/lisa_lab/Theano/theano/tensor/nnet/conv.py", line 111, in conv2d
+    return op(input, filters)
+log_thunk_trace: File "/u/gulcehrc/Codes/python/lisa_lab/Theano/theano/gof/op.py", line 379, in __call__
+    self.add_tag_trace(node)
+log_thunk_trace: For the full definition stack trace set the Theano flags traceback.limit to -1
+Traceback (most recent call last):
+  File "convnet.py", line 143, in <module>
+    bench_ConvMed(1)
+  File "convnet.py", line 110, in bench_ConvMed
+    eval_and_report(train, "ConvMed", [batchsize], N=120)
+  File "convnet.py", line 50, in eval_and_report
+    cost = train(i*bs, bs)
+  File "/u/gulcehrc/Codes/python/lisa_lab/Theano/theano/compile/function_module.py", line 636, in __call__
+    outputs = self.fn()
+  File "/u/gulcehrc/Codes/python/lisa_lab/Theano/theano/gof/link.py", line 355, in streamline_nice_errors_f
+    raise_with_op(node)
+  File "/u/gulcehrc/Codes/python/lisa_lab/Theano/theano/gof/link.py", line 353, in streamline_nice_errors_f
+    thunk()
+  File "/u/gulcehrc/Codes/python/lisa_lab/Theano/theano/gof/op.py", line 580, in rval
+    fill_storage()
+  File "/u/gulcehrc/Codes/python/lisa_lab/Theano/theano/gof/cc.py", line 1209, in __call__
+    raise exc_type, exc_value, exc_trace
+ValueError: ('the number of rows in the image (32) at run time is different than at build time (96) for the ConvOp.', ConvOp{('imshp', (1, 96, 96)),('kshp', (7, 7)),('nkern', 6),('bsize', 1),('dx', 1),('dy', 1),('out_mode', 'valid'),('unroll_batch', 1),('unroll_kern', 6),('unroll_patch', False),('imshp_logical', (1, 96, 96)),('kshp_logical', (7, 7)),('kshp_logical_top_aligned', True)}(<TensorType(float32, 4D)>, <TensorType(float32, 4D)>), [ConvOp{('imshp', (1, 96, 96)),('kshp', (7, 7)),('nkern', 6),('bsize', 1),('dx', 1),('dy', 1),('out_mode', 'valid'),('unroll_batch', 1),('unroll_kern', 6),('unroll_patch', False),('imshp_logical', (1, 96, 96)),('kshp_logical', (7, 7)),('kshp_logical_top_aligned', True)}.0])
+DEPRECATION: max_pool2D renamed to max_pool_2d
+DEPRECATION: max_pool2D renamed to max_pool_2d
+DEPRECATION: max_pool2D renamed to max_pool_2d
+DEPRECATION: max_pool2D renamed to max_pool_2d
+DEPRECATION: max_pool2D renamed to max_pool_2d
+DEPRECATION: max_pool2D renamed to max_pool_2d
+log_thunk_trace: There was a problem executing an Op.
+log_thunk_trace: Definition in:
+log_thunk_trace: File "convnet.py", line 143, in <module>
+    bench_ConvMed(1)
+log_thunk_trace: File "convnet.py", line 96, in bench_ConvMed
+    c0 = tanh(conv2d(sx, w0, image_shape=(batchsize, 1, 96, 96), filter_shape=(6,1,7,7)) + b0.dimshuffle(0, 'x', 'x'))
+log_thunk_trace: File "/u/gulcehrc/Codes/python/lisa_lab/Theano/theano/tensor/nnet/conv.py", line 111, in conv2d
+    return op(input, filters)
+log_thunk_trace: File "/u/gulcehrc/Codes/python/lisa_lab/Theano/theano/gof/op.py", line 379, in __call__
+    self.add_tag_trace(node)
+log_thunk_trace: For the full definition stack trace set the Theano flags traceback.limit to -1
+Traceback (most recent call last):
+  File "convnet.py", line 143, in <module>
+    bench_ConvMed(1)
+  File "convnet.py", line 110, in bench_ConvMed
+    eval_and_report(train, "ConvMed", [batchsize], N=120)
+  File "convnet.py", line 50, in eval_and_report
+    cost = train(i*bs, bs)
+  File "/u/gulcehrc/Codes/python/lisa_lab/Theano/theano/compile/function_module.py", line 636, in __call__
+    outputs = self.fn()
+  File "/u/gulcehrc/Codes/python/lisa_lab/Theano/theano/gof/link.py", line 355, in streamline_nice_errors_f
+    raise_with_op(node)
+  File "/u/gulcehrc/Codes/python/lisa_lab/Theano/theano/gof/link.py", line 353, in streamline_nice_errors_f
+    thunk()
+  File "/u/gulcehrc/Codes/python/lisa_lab/Theano/theano/gof/op.py", line 580, in rval
+    fill_storage()
+  File "/u/gulcehrc/Codes/python/lisa_lab/Theano/theano/gof/cc.py", line 1209, in __call__
+    raise exc_type, exc_value, exc_trace
+ValueError: ('the number of rows in the image (32) at run time is different than at build time (96) for the ConvOp.', ConvOp{('imshp', (1, 96, 96)),('kshp', (7, 7)),('nkern', 6),('bsize', 1),('dx', 1),('dy', 1),('out_mode', 'valid'),('unroll_batch', 1),('unroll_kern', 6),('unroll_patch', False),('imshp_logical', (1, 96, 96)),('kshp_logical', (7, 7)),('kshp_logical_top_aligned', True)}(<TensorType(float64, 4D)>, <TensorType(float64, 4D)>), [ConvOp{('imshp', (1, 96, 96)),('kshp', (7, 7)),('nkern', 6),('bsize', 1),('dx', 1),('dy', 1),('out_mode', 'valid'),('unroll_batch', 1),('unroll_kern', 6),('unroll_patch', False),('imshp_logical', (1, 96, 96)),('kshp_logical', (7, 7)),('kshp_logical_top_aligned', True)}.0])
+Using gpu device 0: GeForce GTX 480
+DEPRECATION: max_pool2D renamed to max_pool_2d
+DEPRECATION: max_pool2D renamed to max_pool_2d
+DEPRECATION: max_pool2D renamed to max_pool_2d
+DEPRECATION: max_pool2D renamed to max_pool_2d
+DEPRECATION: max_pool2D renamed to max_pool_2d
+DEPRECATION: max_pool2D renamed to max_pool_2d
+log_thunk_trace: There was a problem executing an Op.
+Traceback (most recent call last):
+  File "convnet.py", line 143, in <module>
+    bench_ConvMed(1)
+  File "convnet.py", line 110, in bench_ConvMed
+    eval_and_report(train, "ConvMed", [batchsize], N=120)
+  File "convnet.py", line 50, in eval_and_report
+    cost = train(i*bs, bs)
+  File "/u/gulcehrc/Codes/python/lisa_lab/Theano/theano/compile/function_module.py", line 636, in __call__
+    outputs = self.fn()
+  File "/u/gulcehrc/Codes/python/lisa_lab/Theano/theano/gof/link.py", line 355, in streamline_nice_errors_f
+    raise_with_op(node)
+  File "/u/gulcehrc/Codes/python/lisa_lab/Theano/theano/gof/link.py", line 353, in streamline_nice_errors_f
+    thunk()
+  File "/u/gulcehrc/Codes/python/lisa_lab/Theano/theano/gof/op.py", line 598, in rval
+    r = p(n, [x[0] for x in i], o)
+  File "/u/gulcehrc/Codes/python/lisa_lab/Theano/theano/sandbox/cuda/basic_ops.py", line 1737, in perform
+    out[0] = x.reshape(tuple(shp))
+ValueError: size must remain unchanged, changed from 4056 to 48600
+Using gpu device 0: GeForce GTX 480
+Using gpu device 0: GeForce GTX 480
