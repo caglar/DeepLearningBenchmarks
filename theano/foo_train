@@ -1,38 +1,65 @@
-GpuGer{inplace} [@88157840] ''   16
- |<CudaNdarrayType(float32, matrix)> [@88291728]
- |TensorConstant{-0.00999999977648} [@89749776]
- |GpuDimShuffle{1} [@89825232] ''   14
- | |GpuCrossentropySoftmax1HotWithBiasDx [@89941072] ''   12
- | | |CudaNdarrayConstant{[ 1.]} [@88861712]
- | | |GpuCrossentropySoftmaxArgmax1HotWithBias.1 [@89917328] ''   11
- | | | |GpuDimShuffle{x,0} [@89866448] ''   9
- | | | | |GpuGemv{inplace} [@88158032] ''   7
- | | | | | |GpuAlloc [@89824464] ''   5
- | | | | | | |CudaNdarrayConstant{[ 0.]} [@88156816]
- | | | | | | |Shape_i{0} [@88644624] ''   1
- | | | | | | | |<CudaNdarrayType(float32, matrix)> [@88291728]
- | | | | | |TensorConstant{1.0} [@89536592]
- | | | | | |<CudaNdarrayType(float32, matrix)> [@88291728]
- | | | | | |GpuSubtensor{int64} [@89866896] ''   4
- | | | | | | |<CudaNdarrayType(float32, matrix)> [@88291792]
- | | | | | | |ScalarFromTensor [@88292112] ''   0
- | | | | | | | |<TensorType(int64, scalar)> [@88291856]
- | | | | | |TensorConstant{1.0} [@89536592]
- | | | |<CudaNdarrayType(float32, vector)> [@88291920]
- | | | |GpuFromHost [@89940944] ''   10
- | | | | |Elemwise{Identity{output_types_preference=<theano.scalar.basic.specific_out object at 0x55c60d0>, _op_use_c_code=True}} [@89940816] ''   8
- | | | | | |InplaceDimShuffle{x} [@89571280] ''   6
- | | | | | | |Subtensor{int64} [@88322320] ''   3
- | | | | | | | |<TensorType(int32, vector)> [@88291984]
- | | | | | | | |ScalarFromTensor [@88292112] ''   0
- | | |GpuFromHost [@89940944] ''   10
- |GpuSubtensor{int64} [@89866896] ''   4
-Elemwise{Composite{[mod(add(i0, i1), i2)]}}[(0, 1)] [@90338896] ''   2
- |TensorConstant{1} [@88668624]
- |<TensorType(int64, scalar)> [@88291856]
- |TensorConstant{6000} [@89388560]
-GpuElemwise{Composite{[sub(i0, mul(i1, i2))]}}[(0, 0)] [@90340560] ''   15
- |<CudaNdarrayType(float32, vector)> [@88291920]
- |CudaNdarrayConstant{[ 0.01]} [@88861520]
- |GpuSum{1,0} [@89918288] ''   13
- | |GpuCrossentropySoftmax1HotWithBiasDx [@89941072] ''   12
+Elemwise{Composite{[mod(add(i0, i1), i2)]}}[(0, 1)] [@107806416] ''   4
+ |TensorConstant{1} [@105760848]
+ |<TensorType(int64, scalar)> [@104678096]
+ |TensorConstant{6000} [@105980560]
+GpuGer{inplace} [@107207312] ''   22
+ |<CudaNdarrayType(float32, matrix)> [@104678160]
+ |TensorConstant{-0.00999999977648} [@106486544]
+ |GpuDimShuffle{1} [@107067536] ''   19
+ | |GpuCrossentropySoftmax1HotWithBiasDx [@107068624] ''   17
+ | | |CudaNdarrayConstant{[ 1.]} [@107205904]
+ | | |GpuCrossentropySoftmaxArgmax1HotWithBias.1 [@107127888] ''   16
+ | | | |GpuDimShuffle{x,0} [@107042576] ''   15
+ | | | | |GpuGemv{inplace} [@107206800] ''   14
+ | | | | | |GpuAlloc [@106614864] ''   7
+ | | | | | | |CudaNdarrayConstant{[ 0.]} [@107207632]
+ | | | | | | |Shape_i{0} [@104720336] ''   1
+ | | | | | | | |<CudaNdarrayType(float32, matrix)> [@104678160]
+ | | | | | |TensorConstant{1.0} [@106125136]
+ | | | | | |<CudaNdarrayType(float32, matrix)> [@104678160]
+ | | | | | |GpuElemwise{Tanh{output_types_preference=transfer_type{0}, _op_use_c_code=True}}[(0, 0)] [@107806544] ''   12
+ | | | | | | |GpuGemv{no_inplace} [@106581008] ''   10
+ | | | | | | | |<CudaNdarrayType(float32, vector)> [@104678352]
+ | | | | | | | |TensorConstant{1.0} [@106125136]
+ | | | | | | | |<CudaNdarrayType(float32, matrix)> [@104678288]
+ | | | | | | | |GpuSubtensor{int64} [@106617040] ''   6
+ | | | | | | | | |<CudaNdarrayType(float32, matrix)> [@104678224]
+ | | | | | | | | |ScalarFromTensor [@104678608] ''   0
+ | | | | | | | | | |<TensorType(int64, scalar)> [@104678096]
+ | | | | | | | |TensorConstant{1.0} [@106125136]
+ | | | | | |TensorConstant{1.0} [@106125136]
+ | | | |<CudaNdarrayType(float32, vector)> [@104678416]
+ | | | |GpuFromHost [@107068816] ''   13
+ | | | | |Elemwise{Identity{output_types_preference=<theano.scalar.basic.specific_out object at 0x662a910>, _op_use_c_code=True}} [@107128208] ''   11
+ | | | | | |InplaceDimShuffle{x} [@106448912] ''   9
+ | | | | | | |Subtensor{int64} [@104681168] ''   5
+ | | | | | | | |<TensorType(int32, vector)> [@104678480]
+ | | | | | | | |ScalarFromTensor [@104678608] ''   0
+ | | |GpuFromHost [@107068816] ''   13
+ |GpuElemwise{Tanh{output_types_preference=transfer_type{0}, _op_use_c_code=True}}[(0, 0)] [@107806544] ''   12
+GpuGer{inplace} [@107225296] ''   25
+ |<CudaNdarrayType(float32, matrix)> [@104678288]
+ |TensorConstant{-0.00999999977648} [@106486544]
+ |GpuElemwise{Composite{[Composite{[mul(i0, sub(i1, i2))]}(i0, i1, sqr(i2))]}}[(0, 0)] [@107822096] ''   23
+ | |GpuGemv{inplace} [@107207376] ''   21
+ | | |GpuAlloc [@107065872] ''   8
+ | | | |CudaNdarrayConstant{[ 0.]} [@107207632]
+ | | | |Shape_i{1} [@104720528] ''   3
+ | | | | |<CudaNdarrayType(float32, matrix)> [@104678160]
+ | | |TensorConstant{1.0} [@106125136]
+ | | |GpuDimShuffle{1,0} [@106615568] ''   2
+ | | | |<CudaNdarrayType(float32, matrix)> [@104678160]
+ | | |GpuDimShuffle{1} [@107067536] ''   19
+ | | |TensorConstant{1.0} [@106125136]
+ | |CudaNdarrayConstant{[ 1.]} [@107205904]
+ | |GpuElemwise{Tanh{output_types_preference=transfer_type{0}, _op_use_c_code=True}}[(0, 0)] [@107806544] ''   12
+ |GpuSubtensor{int64} [@106617040] ''   6
+GpuElemwise{Composite{[sub(i0, mul(i1, i2))]}}[(0, 0)] [@107844816] ''   24
+ |<CudaNdarrayType(float32, vector)> [@104678352]
+ |CudaNdarrayConstant{[ 0.01]} [@107146512]
+ |GpuElemwise{Composite{[Composite{[mul(i0, sub(i1, i2))]}(i0, i1, sqr(i2))]}}[(0, 0)] [@107822096] ''   23
+GpuElemwise{Composite{[sub(i0, mul(i1, i2))]}}[(0, 0)] [@107820048] ''   20
+ |<CudaNdarrayType(float32, vector)> [@104678416]
+ |CudaNdarrayConstant{[ 0.01]} [@107146512]
+ |GpuSum{1,0} [@107144784] ''   18
+ | |GpuCrossentropySoftmax1HotWithBiasDx [@107068624] ''   17

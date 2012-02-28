@@ -245,8 +245,8 @@ def bench_deep1000():
     eval_and_report(train, "mlp_784_1000_1000_1000_10")
 
 if __name__ == '__main__':
-    online_mlp_784_10()
-    online_mlp_784_500_10()
+    #online_mlp_784_10() # This function gives error
+    #online_mlp_784_500_10()
     bench_logreg()
     bench_mlp_500()
     #online_mlp_784_1000_1000_1000_10()
