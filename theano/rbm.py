@@ -64,4 +64,3 @@ print 'cd1 rbm_bernoulli %i_%i\ttheano{%s/%s/%i}\t%.2f' %(
         batchsize, 
         niter*batchsize/(time.time() - t))
 
-
