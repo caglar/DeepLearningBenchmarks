@@ -1,0 +1,73 @@
+GpuFromHost [@106048208] ''   
+ |DimShuffle{1,0} [@106046352] ''   
+ | |Elemwise{identity} [@106046096] ''   
+ | | |dot [@106023312] ''   
+ | | | |DimShuffle{1,0} [@106023056] ''   
+ | | | | |Subtensor{int64:int64:} [@91705296] ''   
+ | | | | | |HostFromGpu [@91704272] ''   
+ | | | | | | |<CudaNdarrayType(float32, matrix)> [@90312272]
+ | | | | | |ScalarFromTensor [@91704848] ''   
+ | | | | | | |<TensorType(int64, scalar)> [@91523216]
+ | | | | | |ScalarFromTensor [@91705104] ''   
+ | | | | | | |Elemwise{add,no_inplace} [@91703440] ''   
+ | | | | | | | |<TensorType(int64, scalar)> [@91523216]
+ | | | | | | | |<TensorType(int64, scalar)> [@91871248]
+ | | | |SoftmaxGrad [@105953232] ''   
+ | | | | |Elemwise{true_div} [@105952080] ''   
+ | | | | | |<theano.tensor.basic.AdvancedIncSubtensor object at 0x6512c50> [@105626768] ''   
+ | | | | | | |Elemwise{second,no_inplace} [@105980048] ''   
+ | | | | | | | |Elemwise{log,no_inplace} [@105626320] ''   
+ | | | | | | | | |Softmax [@105523088] ''   
+ | | | | | | | | | |Elemwise{add,no_inplace} [@105522832] ''   
+ | | | | | | | | | | |dot [@105512720] ''   
+ | | | | | | | | | | | |Subtensor{int64:int64:} [@91705296] ''   
+ | | | | | | | | | | | |DimShuffle{1,0} [@105512464] ''   
+ | | | | | | | | | | | | |HostFromGpu [@105512016] ''   
+ | | | | | | | | | | | | | |<CudaNdarrayType(float32, matrix)> [@105511440]
+ | | | | | | | | | | |InplaceDimShuffle{x,0} [@105522448] ''   
+ | | | | | | | | | | | |HostFromGpu [@105521424] ''   
+ | | | | | | | | | | | | |<CudaNdarrayType(float32, vector)> [@105511696]
+ | | | | | | | |InplaceDimShuffle{x,x} [@105981456] ''   
+ | | | | | | | | |TensorConstant{0.0} [@105981968]
+ | | | | | | |Elemwise{neg} [@105982544] ''   
+ | | | | | | | |Elemwise{second} [@105983952] ''   
+ | | | | | | | | |Elemwise{neg,no_inplace} [@90342224] ''   
+ | | | | | | | | | |<theano.tensor.basic.AdvancedSubtensor object at 0x649f210> [@105509328] ''   
+ | | | | | | | | | | |Elemwise{log,no_inplace} [@105626320] ''   
+ | | | | | | | | | | |ARange [@105509648] ''   
+ | | | | | | | | | | | |TensorConstant{0} [@105521744]
+ | | | | | | | | | | | |Subtensor{0} [@105522192] ''   
+ | | | | | | | | | | | | |Shape [@105626448] ''   
+ | | | | | | | | | | | | | |Subtensor{int64:int64:} [@105510992] ''   
+ | | | | | | | | | | | | | | |<TensorType(int32, vector)> [@105475088]
+ | | | | | | | | | | | | | | |ScalarFromTensor [@105510480] ''   
+ | | | | | | | | | | | | | | | |<TensorType(int64, scalar)> [@91523216]
+ | | | | | | | | | | | | | | |ScalarFromTensor [@105510736] ''   
+ | | | | | | | | | | | | | | | |Elemwise{add,no_inplace} [@105509840] ''   
+ | | | | | | | | | | | | | | | | |<TensorType(int64, scalar)> [@91523216]
+ | | | | | | | | | | | | | | | | |<TensorType(int64, scalar)> [@91871248]
+ | | | | | | | | | | | |TensorConstant{1} [@105512912]
+ | | | | | | | | | | |Subtensor{int64:int64:} [@105510992] ''   
+ | | | | | | | | |DimShuffle{x} [@106005136] ''   
+ | | | | | | | | | |Elemwise{true_div} [@106004688] ''   
+ | | | | | | | | | | |Elemwise{second,no_inplace} [@105981648] ''   
+ | | | | | | | | | | | |Elemwise{true_div,no_inplace} [@105644944] ''   
+ | | | | | | | | | | | | |Sum [@105626704] ''   
+ | | | | | | | | | | | | | |Elemwise{neg,no_inplace} [@90342224] ''   
+ | | | | | | | | | | | | |Subtensor{0} [@105627536] ''   
+ | | | | | | | | | | | | | |Elemwise{Cast{float32}} [@105627152] ''   
+ | | | | | | | | | | | | | | |Shape [@105473040] ''   
+ | | | | | | | | | | | | | | | |Elemwise{neg,no_inplace} [@90342224] ''   
+ | | | | | | | | | | | |TensorConstant{1.0} [@105981072]
+ | | | | | | | | | | |Subtensor{0} [@105627536] ''   
+ | | | | | | |ARange [@105509648] ''   
+ | | | | | | |Subtensor{int64:int64:} [@105510992] ''   
+ | | | | | |Softmax [@105523088] ''   
+ | | | | |Softmax [@105934800] ''   
+ | | | | | |Elemwise{add,no_inplace} [@105522832] ''   
+GpuFromHost [@106024016] ''   
+ |DimShuffle{1} [@106047440] ''   
+ | |Elemwise{identity} [@106047120] ''   
+ | | |DimShuffle{x,0} [@106022096] ''   
+ | | | |Sum{0} [@106021776] ''   
+ | | | | |SoftmaxGrad [@105953232] ''   

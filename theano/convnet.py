@@ -140,8 +140,8 @@ def bench_ConvLarge(batchsize):
 if __name__ == '__main__':
     bench_ConvSmall(1)
     bench_ConvSmall(60)
-    bench_ConvMed(1)
-    bench_ConvMed(60)
-    bench_ConvLarge(1)
-    bench_ConvLarge(60)
+    #bench_ConvMed(1) #gives error
+    #bench_ConvMed(60) #gives error
+    #bench_ConvLarge(1)
+    #bench_ConvLarge(60)
 
