@@ -23,6 +23,10 @@ class Algorithms(object):
     AA = 4
 
 class ExecutionTimes(object):
+    expected_times_64 = None
+    expected_times_32 = None
+    expected_times_gpu = None
+
     #Recalculate the expected times for the array.
     def __init__(self):
         self.algo = ['logistic_sgd',
@@ -119,7 +123,7 @@ class BenchmarkReporter(object):
         }
 
     def _bmark_name(self, name):
-        return open("out/%s%s_%s_%s.bmark" % (socket.gethostname(), name,
+        return open("outs/%s%s_%s_%s.bmark" % (socket.gethostname(), name,
             config.device, config.floatX), 'w')
 
     def get_bmark_name(self, name=None):
@@ -133,35 +137,40 @@ class BenchmarkReporter(object):
         else:
             return self._bmark_name(name)
 
-    def add_speed(self, time, mode):
+    def add_speed(self, time):
+        mode = self.get_mode()
         self.speeds[mode + "_times"].append(time)
 
-    def eval_model(self, train, mode, name):
-        if self.algorithm == Algorithms.MLP:
-            self._eval_model_mlp(train, mode, name)
-        if self.algorithm == Algorithms.CONVNET:
-            self._eval_model_convnet(train, mode, name)
-        if self.algorithm == Algorithms.RBM:
-            self._eval_model_rbm(train, mode, name)
+    def get_speeds(self):
+        mode = self.get_mode()
+        return self.speeds[mode + "_times"]
 
-    def simple_eval_model(self, train, mode, name):
+    def eval_model(self, train, name):
+        if self.algorithm == Algorithms.MLP:
+            self._eval_model_mlp(train, name)
+        if self.algorithm == Algorithms.CONVNET:
+            self._eval_model_convnet(train, name)
+        if self.algorithm == Algorithms.RBM:
+            self._eval_model_rbm(train, name)
+
+    def simple_eval_model(self, train, name):
         bmark = self.get_bmark_name(name)
         self.stop_watch.start()
         train.fn(n_calls=self.num_examples)
         time = self.stop_watch.stop()
-        self.add_speed(time, mode)
+        self.add_speed(time)
         self._report_model(name, self.batch_size, self.stop_watch.stop(),
-                mode, bmark)
+                bmark)
 
-    def _eval_model_mlp(self, train, mode, name):
+    def _eval_model_mlp(self, train, name):
         bmark = self.get_bmark_name(name)
         if self.batch_flag:
             self.stop_watch.start()
             for i in xrange(self.num_examples):
                 cost = train(i * self.batch_size, self.batch_size)
             time = self.stop_watch.stop()
-            self.add_speed(time, mode)
-            self._report_model(name, self.batch_size, time, mode, bmark)
+            self.add_speed(time)
+            self._report_model(name, self.batch_size, time, bmark)
         else:
             self.stop_watch.start()
             minibatch_size = math.ceil(self.num_examples / self.batch_size)
@@ -170,11 +179,11 @@ class BenchmarkReporter(object):
                 if not (i % 20):
                     print i * self.batch_size, cost
             time = self.stop_watch.stop()
-            self.add_speed(time, mode)
+            self.add_speed(time)
             self._report_model(name, self.batch_size, self.stop_watch.stop(),
-                    mode, bmark)
+                    bmark)
 
-    def _eval_model_convnet(self, train, mode, name):
+    def _eval_model_convnet(self, train, name):
         assert self.num_examples % self.batch_size
         bmark = self.get_bmark_name(name)
         self.stop_watch.start()
@@ -184,28 +193,28 @@ class BenchmarkReporter(object):
             if not (i % (1000 / self.batch_size)):
                 print i * self.batch_size, cost
         elapsed_time = self.stop_watch.stop()
-        self.add_speed(elapsed_time, mode)
+        self.add_speed(elapsed_time)
         expsec = self.num_examples / time
-        self._report_model(name, self.batch_size, expsec, mode, bmark)
+        self._report_model(name, self.batch_size, expsec, bmark)
 
-    def _eval_model_rbm(self, train, mode, name):
+    def _eval_model_rbm(self, train, name):
         bmark = self.get_bmark_name(name)
         self.stop_watch.start()
         for i in xrange(self.niter):
             train(i * self.batch_size, self.batch_size)
         elapsed_time = self.stop_watch.stop()
-        self.add_speed(time, mode)
-        self._report_model(name, self.batch_size, elapsed_time, mode, bmark)
+        self.add_speed(time)
+        self._report_model(name, self.batch_size, elapsed_time, bmark)
 
-    def _report_model(self, name, batch_size, elapsed_time, mode, bmark):
+    def _report_model(self, name, batch_size, elapsed_time, bmark):
         if self.algorithm == Algorithms.MLP:
-            self._report_model_mlp(name, batch_size, elapsed_time, mode, bmark)
+            self._report_model_mlp(name, batch_size, elapsed_time, bmark)
         if self.algorithm == Algorithms.CONVNET:
-            self._report_model_convnet(name, batch_size, elapsed_time, mode, bmark)
+            self._report_model_convnet(name, batch_size, elapsed_time, bmark)
         if self.algorithm == Algorithms.RBM:
-            self._report_model_rbm(name, batch_size, elapsed_time, mode, bmark)
+            self._report_model_rbm(name, batch_size, elapsed_time, bmark)
 
-    def _report_model_mlp(self, name, batch_size, elapsed_time, mode, bmark):
+    def _report_model_mlp(self, name, batch_size, elapsed_time, bmark):
         bmark.write("%s\t" % name)
         if config.floatX == 'float32':
             prec = 'float'
@@ -225,7 +234,7 @@ class BenchmarkReporter(object):
             config.device[0], prec, batch_size))
         bmark.write("%.2f\n" % expsec)
 
-    def _report_model_rbm(self, name, batch_size, elapsed_time, mode, bmark):
+    def _report_model_rbm(self, name, batch_size, elapsed_time, bmark):
         bmark.write("cd1 %s %i_%i\t" % (name, self.n_in, self.n_out))
         if config.floatX == 'float32':
             prec = 'float'
@@ -241,17 +250,27 @@ class BenchmarkReporter(object):
         # time and the real time, we consider this an error.
         return sum((ratio < 0.95) + (ratio > 1.05))
 
-    def report_speed_info(self, mode):
-        speed_outfile= "out/speeds"
+    def get_mode(self):
+        if config.device.startswith("gpu"):
+            return RunMode.GPU
+        else:
+            if config.floatX == "float32":
+                return RunMode.FLOAT_32
+            elif config.floatX == "float64":
+                return RunMode.FLOAT_64
+
+    def report_speed_info(self):
+        mode = self.get_mode()
+        speed_outfile= "outs/speeds"
         f = open(speed_outfile, "w")
         if mode == RunMode.FLOAT_32:
-            err = self.compare(ExecutionTimes.expected_times_32, self.float32_times) 
+            err = self.compare(ExecutionTimes.expected_times_32, self.get_speeds()) 
             print>>f, "speed_failure_float64=" + str(err)
         elif mode == RunMode.FLOAT_64:
-            err = self.compare(ExecutionTimes.expected_times_64, self.float64_times) 
+            err = self.compare(ExecutionTimes.expected_times_64, self.get_speeds()) 
             print>>f, "speed_failure_float64=" + str(err)
         elif mode == RunMode.GPU:
-            err = self.compare(ExecutionTimes.expected_times_gpu, self.gpu_times)
+            err = self.compare(ExecutionTimes.expected_times_gpu, self.get_speeds())
             print>>f, "speed_failure_gpu=" + str(err)
 
 GlobalBenchReporter = BenchmarkReporter()
