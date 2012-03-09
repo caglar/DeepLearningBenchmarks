@@ -1,2 +1,2 @@
 #/bin/bash -x
-rm *.bmark *.log *.conf foo foo_train
+rm out/*.bmark out/*.log out/*.conf foo foo_train

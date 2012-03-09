@@ -1,11 +1,11 @@
 import time, socket
-from theano.tensor import lscalar, matrix, tanh, dot, grad, log, arange
+from theano.tensor import lscalar, tanh, dot, grad, log, arange
 from theano.tensor.nnet import softmax, crossentropy_softmax_argmax_1hot_with_bias
 from theano import shared, function, config
 import numpy, theano
 from numpy import asarray, random
 
-import bench_reporter
+from bench_reporter import *
 random.seed(2344)
 
 import theano.tensor.blas_c
@@ -34,7 +34,7 @@ nsi = lscalar()
 sx = data_x[si:si + nsi]
 sy = data_y[si:si + nsi]
 
-bmark = open("%smlp_%s_%s.bmark" %(
+bmark = open("out/%smlp_%s_%s.bmark" %(
     socket.gethostname(),
     config.device,
     config.floatX),
@@ -88,6 +88,7 @@ def online_mlp_784_10():
     t = time.time()
     train.fn(n_calls=n_examples)
     dt = time.time() - t
+
     try:
         train.fn.update_profile(train.profile)
     except AttributeError:
@@ -105,6 +106,7 @@ def online_mlp_784_10():
         for i in xrange(n_examples): fn()
         dt = time.time() - t
         reportmodel('mlp_784_10_hack3', 1, dt)
+
 
 def online_mlp_784_500_10():
     HUs=500
@@ -196,7 +198,7 @@ def bench_logreg():
     train = function([si, nsi], [],
             updates={ v:v - lr * gv, c:c - lr * gc })
     theano.printing.debugprint(train, file=open('foo_train', 'wb'))
-
+    
     eval_and_report(train, "mlp_784_10")
     print v.get_value().mean()
     print v.get_value()[:5,:5]
@@ -219,6 +221,7 @@ def bench_mlp_500():
                       b:b-lr*gb,
                       v:v-lr*gv,
                       c:c-lr*gc })
+
     eval_and_report(train, "mlp_784_500_10")
 
 def bench_deep1000():
@@ -247,7 +250,8 @@ def bench_deep1000():
     eval_and_report(train, "mlp_784_1000_1000_1000_10")
 
 if __name__ == '__main__':
-    online_mlp_784_10() # This function gives error
+    GlobalBenchReporter.__init__(n_examples, batchsize, False, Algorithms.MLP)
+    online_mlp_784_10()
     online_mlp_784_500_10()
     bench_logreg()
     bench_mlp_500()
